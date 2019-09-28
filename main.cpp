@@ -60,20 +60,61 @@ class Vector
                 cin >> vector_array[i];
             }
         }
+
         Vector(float *a, int c){
             n = c;
+            vector_array = new float[n];
+
             for (int i = 0; i < n; i++){
-                vector_array[i] = *a+i;
+                vector_array[i] = *(a+i);
             }
         }
 
         int capacity(){
             return n;
         }
+
         void Clear(){
             delete []vector_array;
             n = 0;
         }
+
+        bool contains(float elem){
+            for (int i = 0; i < n;i++){
+                if (vector_array[i] == elem) return true;
+            }
+            return false;
+        }
+
+        int indexOf(float elem){
+            for (int i = 0; i < n;i++){
+                if (vector_array[i] == elem) return i+1;
+            }
+            return 0;
+        }
+
+        int lastIndexOf(float elem){
+            for (int i = n-1; i >=0; i--){
+                if (vector_array[i] == elem) return i+1;
+            }
+            return 0;
+        }
+
+        float elementAt(int index){
+            return vector_array[index - 1];
+        }
+
+        bool isEmpty(){
+            return (!n);
+        }
+
+        void display(){
+            for (int i = 0; i < n; i++){
+                cout << vector_array[i] << " ";
+            }
+            cout << endl;
+        }
+
         ~Vector(){
             delete []vector_array;
         }
@@ -91,18 +132,39 @@ Real A(6);
   C.display();
 }
 
-void test_pointerArray(float* a){
-    cout << *(a+1);
+float* test_pointerArray(){
+   float a[] = {1,2,3,4,5};
+   float *p = a;
+   return p;
 }
 
 void test_vector(){
-    float a[]={1,2,3,4,5};
-    //test_pointerArray(s);
-    Vector b(a, 5);
-    Vector c;
-    cout << b.capacity() << endl;
+    float a[]={1,2,3,4,5,2,3,4};
+
+    Vector c(a, 8);
+    Vector b;
+
+    cout << "Capacity of b: " << b.capacity() << endl;
+    cout << "Does b contain 13? : " << b.contains(13) << endl
+         << "Does b contain 3? : " << b.contains(3) << endl; //for contain function
+
+    cout << "Index position of 3: " << b.indexOf(3) << endl
+         << "Index position of 15: " << b.indexOf(15) << endl; //if element not exist, return 0
+
+    cout << "Last Index position of 3: " << b.lastIndexOf(3) << endl
+         << "Last Index position of 15: " << b.lastIndexOf(15) << endl; //if element not exist, return 0
+
+    cout << "Element at position 2 is: " << b.elementAt(2) << endl;
+
+    cout << "Let see what we have in Vector b: ";
+    b.display();
+
     b.Clear();
-    cout << b.capacity() << endl;
+    cout << "b was cleared." << endl;
+    cout << "Capacity of b: " << b.capacity() << endl;
+
+    cout << "Is b empty? : " << b.isEmpty() << endl
+         << "Is c empty? : " << c.isEmpty() << endl;
 }
 
 main()
@@ -110,7 +172,9 @@ main()
  //test_prod();
  test_vector();
 
- //test_pointerArray();
+ //float* b = test_pointerArray();
+
+
  // getch();
   return 0;
 }
