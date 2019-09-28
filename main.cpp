@@ -60,12 +60,20 @@ class Vector
                 cin >> vector_array[i];
             }
         }
-        Vector(float *a, int n){
+        Vector(float *a, int c){
+            n = c;
             for (int i = 0; i < n; i++){
                 vector_array[i] = *a+i;
             }
         }
 
+        int capacity(){
+            return n;
+        }
+        void Clear(){
+            delete []vector_array;
+            n = 0;
+        }
         ~Vector(){
             delete []vector_array;
         }
@@ -92,6 +100,9 @@ void test_vector(){
     //test_pointerArray(s);
     Vector b(a, 5);
     Vector c;
+    cout << b.capacity() << endl;
+    b.Clear();
+    cout << b.capacity() << endl;
 }
 
 main()
