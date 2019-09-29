@@ -108,6 +108,13 @@ class Vector
             return (!n);
         }
 
+        int toArray(float *d){
+            for (int i = 0; i < n; i++){
+                *(d+i) = vector_array[i];
+            }
+            return n;
+        }
+
         void display(){
             for (int i = 0; i < n; i++){
                 cout << vector_array[i] << " ";
@@ -140,7 +147,7 @@ float* test_pointerArray(){
 
 void test_vector(){
     float a[]={1,2,3,4,5,2,3,4};
-
+    float d[]={};
     Vector c(a, 8);
     Vector b;
 
@@ -159,6 +166,14 @@ void test_vector(){
     cout << "Let see what we have in Vector b: ";
     b.display();
 
+    cout << "Now put info from vector b to array d." << endl;
+    int n = b.toArray(d);   //return the size of vector b
+    cout << "Let see what we have in Vector d: ";
+    for (int i = 0; i < n; i++){
+        cout << d[i] << " ";
+    }
+    cout << endl;
+
     b.Clear();
     cout << "b was cleared." << endl;
     cout << "Capacity of b: " << b.capacity() << endl;
@@ -174,8 +189,6 @@ main()
 
  //float* b = test_pointerArray();
 
-
- // getch();
   return 0;
 }
 
